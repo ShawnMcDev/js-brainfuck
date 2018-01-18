@@ -1,7 +1,7 @@
 /** 
  * Brainfuck Interpreter
  * Author: Shawn McLaughlin
- * Repository: 
+ * Repository: https://github.com/ShawnMcDev/js-brainfuck
  * https://medium.com/@shawnmclau/building-a-brainfuck-interpreter-with-javascript-116fdb293f5b
  */
 
