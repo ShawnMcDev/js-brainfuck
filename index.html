@@ -6,52 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Brainfuck Interpreter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
 </head>
 
 <body>
-    <div>
-        Program Output:
-        <p id="output"></p>
+    <div class="container">
+        <div class="row">
+            <div class="col text-center header">
+                <h1>Brainfuck &#x1F913; Interpreter</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <textarea class="input" id="inputProgram" placeholder="Enter program here.."></textarea>
+                <div class="text-right buttons">
+                    <button id="btnRun" class="btn btn-success" onclick="runWithInterface()">Run Program</button>
+                    <button id="btnReset" class="btn btn-warning" onclick="resetWithInterface()">Reset</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <textarea class="input" id="inputInput" placeholder="Enter input data here.."></textarea>
+            </div>
+        </div>
+        <div class="row output">
+            <div class="col">
+                Program Output:<br/>
+                <code id="output">
+                    <i class="text-muted">Run program to see output</i>
+                </code>
+            </div>
+        </div>
+
+
+
+
+        <div class="samples row text-center">
+            <div class="col">
+                <h2>Sample Programs</h2>
+                <h5>(credit <a href="https://esolangs.org/wiki/Brainfuck">esolangs.org</a>)</h3>
+                    <div class="row">
+                        <div class="sample col-lg-4">
+                            <h2>Cat</h2>
+                            <textarea class="sampleTA" id="sampleCat" readonly>,[.,]</textarea>
+                            <p>Simply outputs whatever is provided as input.</p>
+                            <button class="btn btn-primary" onclick="useSample('sampleCat')">Load &#x2B06;</button>
+                        </div>
+                        <div class="sample col-lg-4">
+                            <h2>Hello World</h2>
+                            <textarea class="sampleTA" style="height: 100px;" id="sampleHello" readonly>++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.</textarea>
+                            <p>The classic. Simply outputs "Hello World!"</p>
+                            <button class="btn btn-primary" onclick="useSample('sampleHello')">Load &#x2B06;</button>
+                        </div>
+                        <div class="sample col-lg-4">
+                            <h2>Brainfuck Interpreter</h2>
+                            <textarea class="sampleTA" style="height: 230px" id="sampleInterpreter" readonly>>>>+[[-]>>[-]++>+>+++++++[<++++>>++<-]++>>+>+>+++++[>++>++++++<<-]+>>>,<++[[>[->>]<[>>]<<-]<[<]<+>>[>]>[<+>-[[<+>-]>]<[[[-]<]++<-[<+++++++++>[<->-]>>]>>]]<<]<]<[[<]>[[>]>>[>>]+[<<]<[<]<+>>-]>[>]+[->>]<<<<[[<<]<[<]+<<[+>+<<-[>-->+<<-[>+<[>>+<<-]]]>[<+>-]<]++>>-->[>]>>[>>]]<<[>>+<[[<]<]>[[<<]<[<]+[-<+>>-[<<+>++>-[<->[<<+>>-]]]<[>+<-]>]>[>]>]>[>>]>>]<<[>>+>>+>>]<<[->>>>>>>>]<<[>.>>>>>>>]<<[>->>>>>]<<[>,>>>]<<[>+>]<<[+<<]<]</textarea>
+                            <p>Yep. A brainfuck interpreter, written in brainfuck by <a href="http://www.hevanet.com/cristofd/brainfuck">Daniel Cristofani.</a> Enter a brainfuck program as the input using ! to separate the program from the input of the program.
+                                <span class="text-danger">(Do NOT omit the !, as the interpreter expects it!)</span></p>
+                            <button class="btn btn-primary" onclick="useSample('sampleInterpreter')">Load &#x2B06;</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="footer text-center text-muted">Background from <a href="http://www.dinpattern.com/">dinpattern.com</a></div>
     </div>
 
-    <div>
-        <input type="text" id="inputProgram" placeholder="Enter program here.." />
-        <input type="text" id="inputInput" placeholder="Enter input data here.." />
-        <button id="btnRun" onclick="runWithInterface()">Run Program</button>
-        <button id="btnReset" onclick="resetWithInterface()">Reset</button>
-    </div>
-
-    <div class="samples">
-        Sample Programs:
-
-        <div class="sample">
-            <p>Cat: Simply outputs whatever is provided as input.</p>
-            <input id="sampleCat" type="text" value=",[.,]" readonly />
-            <button onclick="document.getElementById('inputProgram').value = document.getElementById('sampleCat').value">
-                Use</button>
-        </div>
-        <div class="sample">
-            <p>Hello World: The classic. Outputs "Hello World!"</p>
-            <textarea id="sampleHello" readonly>++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.</textarea>
-            <button onclick="document.getElementById('inputProgram').value = document.getElementById('sampleHello').value">
-                    Use</button>
-        </div>
-        <div class="sample">
-            <p>Interpreterception: Yep. A brainfuck interpreter, written in brainfuck! Allegedly the shortest one. Credit goes to <a href="http://www.hevanet.com/cristofd/brainfuck">Daniel Cristofani.</a> Enter a brainfuck program as the input. Use ! to
-                separate the program from the input of the program. (Do NOT omit the !, as the interpreter expects it!)</p>
-            <textarea id="sampleInterpreter" readonly>>>>+[[-]>>[-]++>+>+++++++[<++++>>++<-]++>>+>+>+++++[>++>++++++<<-]+>>>,<++[[>[
-                ->>]<[>>]<<-]<[<]<+>>[>]>[<+>-[[<+>-]>]<[[[-]<]++<-[<+++++++++>[<->-]>>]>>]]<<
-                ]<]<[[<]>[[>]>>[>>]+[<<]<[<]<+>>-]>[>]+[->>]<<<<[[<<]<[<]+<<[+>+<<-[>-->+<<-[>
-                +<[>>+<<-]]]>[<+>-]<]++>>-->[>]>>[>>]]<<[>>+<[[<]<]>[[<<]<[<]+[-<+>>-[<<+>++>-
-                [<->[<<+>>-]]]<[>+<-]>]>[>]>]>[>>]>>]<<[>>+>>+>>]<<[->>>>>>>>]<<[>.>>>>>>>]<<[
-                >->>>>>]<<[>,>>>]<<[>+>]<<[+<<]<]</textarea>
-            <button onclick="document.getElementById('inputProgram').value = document.getElementById('sampleInterpreter').value">
-                        Use</button>
-        </div>
-    </div>
-
-    <script src="./brainfuck.js"></script>
+    <script src=" ./brainfuck.js "></script>
 </body>
 
 </html>

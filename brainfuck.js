@@ -22,14 +22,22 @@ let output = "";
 
 /** Helper/UI functions, unrelated to interpreter */
 
+const inputProgram = document.getElementById("inputProgram");
+const inputInput = document.getElementById("inputInput");
+const outputArea = document.getElementById("output");
+
 // Shout out to https://stackoverflow.com/a/39914235/6849990 for this elegant sleep solution!
 function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
+function useSample(targetSelector) {
+    inputProgram.value = document.getElementById(targetSelector).value;
+}
+
 function runWithInterface() {
     // Set the program and input variables to the specified entries
-    program = document.getElementById("inputProgram").value;
-    input = document.getElementById("inputInput").value;
-    document.getElementById("output").innerText = interpret();
+    program = inputProgram.value;
+    input = inputInput.value;
+    outputArea.innerText = interpret();
 
     // Reset memory state
     resetState();
@@ -37,8 +45,9 @@ function runWithInterface() {
 
 function resetWithInterface() {
     resetState();
-    document.getElementById("inputProgram").value = "";
-    document.getElementById("inputInput").value = "";
+    inputProgram.value = "";
+    inputInput.value = "";
+    outputArea.innerText = "";
 }
 
 /** Interpreter code */
@@ -103,6 +112,7 @@ function interpret(settings = {}) {
                     let count = 0;
                     while (true) {
                         ipointer++;
+                        if (!program[ipointer]) break;
                         if (program[ipointer] === "[") count++;
                         else if (program[ipointer] === "]") {
                             if (count) count--;
