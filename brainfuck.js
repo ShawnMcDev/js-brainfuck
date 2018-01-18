@@ -6,7 +6,7 @@
  */
 
 /** Interpreter variables */
-// Create a new 30,000 size array, with each cell initialized with the value of 0
+// Create a new 30,000 size array, with each cell initialized with the value of 0. Memory can expand.
 const MEMORY_SIZE = 30000;
 const memory = new Array(MEMORY_SIZE).fill(0);
 // Instruction pointer (Points to the current INSTRUCTION)
@@ -89,8 +89,10 @@ function interpret(settings = {}) {
     while (!end) {
         switch (program[ipointer]) {
             case '>':
-                if (mpointer < MEMORY_SIZE - 1)
-                    mpointer++;
+                if (mpointer == memory.length - 1)
+                /* If we try to access memory beyond what is currently available, expand array */
+                    memory.push(0, 0, 0, 0, 0);
+                mpointer++;
                 break;
             case '<':
                 if (mpointer > 0)
