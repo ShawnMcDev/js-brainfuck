@@ -7,7 +7,8 @@
 
 /** Interpreter variables */
 // Create a new 30,000 size array, with each cell initialized with the value of 0
-const memory = new Array(30000).fill(0);
+const MEMORY_SIZE = 30000;
+const memory = new Array(MEMORY_SIZE).fill(0);
 // Instruction pointer (Points to the current INSTRUCTION)
 let ipointer = 0;
 // Memory pointer (Points to a cell in MEMORY)
@@ -34,13 +35,13 @@ function useSample(targetSelector) {
 }
 
 function runWithInterface() {
+    // Reset memory state
+    resetState();
+
     // Set the program and input variables to the specified entries
     program = inputProgram.value;
     input = inputInput.value;
     outputArea.innerText = interpret();
-
-    // Reset memory state
-    resetState();
 }
 
 function resetWithInterface() {
@@ -88,10 +89,12 @@ function interpret(settings = {}) {
     while (!end) {
         switch (program[ipointer]) {
             case '>':
-                mpointer++;
+                if (mpointer < MEMORY_SIZE - 1)
+                    mpointer++;
                 break;
             case '<':
-                mpointer--;
+                if (mpointer > 0)
+                    mpointer--;
                 break;
             case '+':
                 memory[mpointer]++;
