@@ -13,7 +13,7 @@ const memory = new Array(MEMORY_SIZE).fill(0);
 let ipointer = 0;
 // Memory pointer (Points to a cell in MEMORY)
 let mpointer = 0;
-// Address stack. Used to track adresses (index) of left brackets
+// Address stack. Used to track addresses (index) of left brackets
 let astack = [];
 
 let program = "";
@@ -83,7 +83,7 @@ function getInput() {
     return val;
 }
 
-function interpret(settings = {}) {
+function interpret() {
     let end = false;
 
     while (!end) {
@@ -138,9 +138,6 @@ function interpret(settings = {}) {
         }
         ipointer++;
 
-        if (settings.sleep) {
-            sleep(settings.sleep);
-        }
     }
     console.log(output);
     return output;
