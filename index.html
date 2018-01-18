@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Brainfuck Interpreter</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <div>
+        Program Output:
+        <p id="output"></p>
+    </div>
+
+    <div>
+        <input type="text" id="inputProgram" placeholder="Enter program here.." />
+        <input type="text" id="inputInput" placeholder="Enter input data here.." />
+        <button id="btnRun" onclick="runWithInterface()">Run Program</button>
+        <button id="btnReset" onclick="resetWithInterface()">Reset</button>
+    </div>
+
+    <div class="samples">
+        Sample Programs:
+
+        <div class="sample">
+            <p>Cat: Simply outputs whatever is provided as input.</p>
+            <input id="sampleCat" type="text" value=",[.,]" readonly />
+            <button onclick="document.getElementById('inputProgram').value = document.getElementById('sampleCat').value">
+                Use</button>
+        </div>
+        <div class="sample">
+            <p>Hello World: The classic. Outputs "Hello World!"</p>
+            <textarea id="sampleHello" readonly>++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.</textarea>
+            <button onclick="document.getElementById('inputProgram').value = document.getElementById('sampleHello').value">
+                    Use</button>
+        </div>
+        <div class="sample">
+            <p>Interpreterception: Yep. A brainfuck interpreter, written in brainfuck! Allegedly the shortest one. Credit goes to <a href="http://www.hevanet.com/cristofd/brainfuck">Daniel Cristofani.</a> Enter a brainfuck program as the input. Use ! to
+                separate the program from the input of the program. (Do NOT omit the !, as the interpreter expects it!)</p>
+            <textarea id="sampleInterpreter" readonly>>>>+[[-]>>[-]++>+>+++++++[<++++>>++<-]++>>+>+>+++++[>++>++++++<<-]+>>>,<++[[>[
+                ->>]<[>>]<<-]<[<]<+>>[>]>[<+>-[[<+>-]>]<[[[-]<]++<-[<+++++++++>[<->-]>>]>>]]<<
+                ]<]<[[<]>[[>]>>[>>]+[<<]<[<]<+>>-]>[>]+[->>]<<<<[[<<]<[<]+<<[+>+<<-[>-->+<<-[>
+                +<[>>+<<-]]]>[<+>-]<]++>>-->[>]>>[>>]]<<[>>+<[[<]<]>[[<<]<[<]+[-<+>>-[<<+>++>-
+                [<->[<<+>>-]]]<[>+<-]>]>[>]>]>[>>]>>]<<[>>+>>+>>]<<[->>>>>>>>]<<[>.>>>>>>>]<<[
+                >->>>>>]<<[>,>>>]<<[>+>]<<[+<<]<]</textarea>
+            <button onclick="document.getElementById('inputProgram').value = document.getElementById('sampleInterpreter').value">
+                        Use</button>
+        </div>
+    </div>
+
+    <script src="./brainfuck.js"></script>
+</body>
+
+</html>
